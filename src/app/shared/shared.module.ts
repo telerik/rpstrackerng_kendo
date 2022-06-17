@@ -9,6 +9,7 @@ import { InputsModule } from '@progress/kendo-angular-inputs';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { ChartsModule } from '@progress/kendo-angular-charts';
 import { SchedulerModule } from '@progress/kendo-angular-scheduler';
+import { FloatingLabelModule } from "@progress/kendo-angular-label";
 
 import { PresetFilterComponent } from './components/preset-filter/preset-filter.component';
 
@@ -28,21 +29,23 @@ import 'hammerjs';
         InputsModule,
         GridModule,
         ChartsModule,
-        SchedulerModule
+        SchedulerModule,
+        FloatingLabelModule,
     ],
     exports: [
         FormsModule,
         MainMenuComponent,
         SideMenuComponent,
         PresetFilterComponent,
-	ModalComponent,
+	    ModalComponent,
         LayoutModule,
         ButtonsModule,
         DropDownsModule,
         InputsModule,
         GridModule,
         ChartsModule,
-        SchedulerModule
+        SchedulerModule,
+        FloatingLabelModule,
     ],
     declarations: [
         MainMenuComponent,
