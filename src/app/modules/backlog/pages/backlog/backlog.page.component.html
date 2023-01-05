@@ -55,26 +55,23 @@
     <div class="modal-body">
         <form>
             <div class="form-group">
-                <kendo-textbox-container floatingLabel="Title" style="width: 100%;">
-                    <input kendoTextBox [(ngModel)]="newItem.title" name="title" />
-                </kendo-textbox-container>
+                <kendo-floatinglabel text="Title" style="width:100%;">
+                    <input kendoTextBox [(ngModel)]="newItem.title" name="title"/>
+                </kendo-floatinglabel>
             </div>
 
             <div class="form-group">
-
-                <kendo-textbox-container floatingLabel="Description" style="width: 100%;">
+                <kendo-floatinglabel text="Description" style="width:100%;">
                     <textarea kendoTextArea [(ngModel)]="newItem.description" name="description"></textarea>
-                </kendo-textbox-container>
-
+                </kendo-floatinglabel>
             </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Item Type</label>
-                <div class="col-sm-10">
-                    <select class="form-control" [(ngModel)]="newItem.type" name="itemType">
-                        <option *ngFor="let itemType of itemTypesProvider" [ngValue]="itemType">{{itemType}}</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                    <kendo-floatinglabel text="Item Type" style="width:100%;">
+                        <select class="form-control" [(ngModel)]="newItem.type" name="itemType">
+                            <option *ngFor="let itemType of itemTypesProvider" [ngValue]="itemType">{{itemType}}</option>
+                        </select>
+                    </kendo-floatinglabel>
             </div>
 
         </form>
