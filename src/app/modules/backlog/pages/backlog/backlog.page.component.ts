@@ -15,6 +15,7 @@ import { ModalService } from 'src/app/shared/services/modal.service';
 import { PageChangeEvent, GridDataResult, SelectableSettings, SelectionEvent } from '@progress/kendo-angular-grid';
 import { PriorityEnum } from 'src/app/core/models/domain/enums';
 import { SortDescriptor, orderBy, State, process } from '@progress/kendo-data-query';
+import { plusIcon, SVGIcon } from "@progress/kendo-svg-icons";
 
 @Component({
     selector: 'app-backlog',
@@ -23,6 +24,7 @@ import { SortDescriptor, orderBy, State, process } from '@progress/kendo-data-qu
 })
 export class BacklogPageComponent implements OnInit {
 
+    public svgPlus: SVGIcon = plusIcon;
     private itemsSub: Subscription | undefined;
     public items$: BehaviorSubject<PtItem[]> = new BehaviorSubject<PtItem[]>([]);
     public currentPreset: PresetType = 'open';
