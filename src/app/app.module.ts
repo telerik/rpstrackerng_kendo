@@ -12,8 +12,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { GridModule } from '@progress/kendo-angular-grid';
 import { LayoutModule } from '@progress/kendo-angular-layout';
-
-
+import { IconsModule } from "@progress/kendo-angular-icons";
 
 @NgModule({
   declarations: [
@@ -30,6 +29,7 @@ import { LayoutModule } from '@progress/kendo-angular-layout';
     BrowserAnimationsModule,
     GridModule,
     LayoutModule,
+    IconsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
