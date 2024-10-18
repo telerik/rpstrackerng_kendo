@@ -5,14 +5,16 @@ import { PtTask } from '../../../../../core/models/domain';
 import { PtNewTask, PtTaskUpdate } from '../../../../../shared/models/dto';
 import { EMPTY_STRING } from '../../../../../core/helpers/string-helpers';
 import { BehaviorSubject } from 'rxjs';
-import { SchedulerEvent, SaveEvent, RemoveEvent } from '@progress/kendo-angular-scheduler';
+import { SchedulerEvent, SaveEvent, RemoveEvent, SchedulerModule, MultiDayViewModule, MonthViewModule, TimelineViewModule } from '@progress/kendo-angular-scheduler';
 
 
 @Component({
     selector: 'app-item-task-schedule',
     templateUrl: 'pt-item-task-schedule.component.html',
     styleUrls: ['pt-item-task-schedule.component.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [SchedulerModule, MultiDayViewModule, MonthViewModule, TimelineViewModule]
 })
 export class PtItemTaskScheduleComponent implements OnInit {
 

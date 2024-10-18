@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Subscription, BehaviorSubject, Observable } from 'rxjs';
 
-import { SelectEvent } from '@progress/kendo-angular-layout';
+import { SelectEvent, TabStripModule } from '@progress/kendo-angular-layout';
 
 import { DetailScreenType } from 'src/app/shared/models/ui/types/detail-screens';
 import { PtItem, PtTask, PtComment, PtUser } from 'src/app/core/models/domain';
@@ -11,10 +11,17 @@ import { BacklogService } from '../../services/backlog.service';
 import { PtUserService, NavigationService } from 'src/app/core/services';
 import { PtNewTask, PtTaskUpdate, PtNewComment } from 'src/app/shared/models/dto';
 import { Store } from 'src/app/core/state/app-store';
+import { PtItemChitchatComponent } from '../../components/detail/item-chitchat/pt-item-chitchat.component';
+import { PtItemTaskScheduleComponent } from '../../components/detail/item-task-schedule/pt-item-task-schedule.component';
+import { PtItemTasksComponent } from '../../components/detail/item-tasks/pt-item-tasks.component';
+import { PtItemDetailsComponent } from '../../components/detail/item-details/pt-item-details.component';
+import { NgIf, AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-backlog-detail-page',
-    templateUrl: 'detail.page.component.html'
+    templateUrl: 'detail.page.component.html',
+    standalone: true,
+    imports: [NgIf, TabStripModule, PtItemDetailsComponent, PtItemTasksComponent, PtItemTaskScheduleComponent, PtItemChitchatComponent, AsyncPipe]
 })
 export class DetailPageComponent implements OnInit, OnDestroy {
 

@@ -12,15 +12,24 @@ import { EMPTY_STRING } from 'src/app/core/helpers';
 import { ItemType } from 'src/app/core/constants';
 import { Store } from 'src/app/core/state/app-store';
 import { ModalService } from 'src/app/shared/services/modal.service';
-import { PageChangeEvent, GridDataResult, SelectableSettings, SelectionEvent } from '@progress/kendo-angular-grid';
+import { PageChangeEvent, GridDataResult, SelectableSettings, SelectionEvent, GridModule, SharedModule, BodyModule } from '@progress/kendo-angular-grid';
 import { PriorityEnum } from 'src/app/core/models/domain/enums';
 import { SortDescriptor, orderBy, State, process } from '@progress/kendo-data-query';
 import { plusIcon, SVGIcon } from "@progress/kendo-svg-icons";
+import { NgFor, DatePipe } from '@angular/common';
+import { TextBoxModule } from '@progress/kendo-angular-inputs';
+import { FloatingLabelModule } from '@progress/kendo-angular-label';
+import { FormsModule } from '@angular/forms';
+import { ModalComponent } from '../../../../shared/components/modal-dialog/modal-dialog.component';
+import { ButtonModule } from '@progress/kendo-angular-buttons';
+import { PresetFilterComponent } from '../../../../shared/components/preset-filter/preset-filter.component';
 
 @Component({
     selector: 'app-backlog',
     templateUrl: 'backlog.page.component.html',
-    styleUrls: ['backlog.page.component.css']
+    styleUrls: ['backlog.page.component.css'],
+    standalone: true,
+    imports: [PresetFilterComponent, ButtonModule, GridModule, SharedModule, BodyModule, ModalComponent, FormsModule, FloatingLabelModule, TextBoxModule, NgFor, DatePipe]
 })
 export class BacklogPageComponent implements OnInit {
 

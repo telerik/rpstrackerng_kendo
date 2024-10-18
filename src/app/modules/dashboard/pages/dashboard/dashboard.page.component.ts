@@ -9,6 +9,11 @@ import { DashboardFilter } from 'src/app/shared/models/dto/stats/dashboard-filte
 
 import { PtUserService } from 'src/app/core/services';
 import { PtUser } from 'src/app/core/models/domain';
+import { ChartModule } from '@progress/kendo-angular-charts';
+import { ActiveIssuesComponent } from '../../components/active-issues/active-issues.component';
+import { ButtonGroupModule, ButtonModule } from '@progress/kendo-angular-buttons';
+import { ComboBoxModule, SharedDirectivesModule } from '@progress/kendo-angular-dropdowns';
+import { NgIf, AsyncPipe, DatePipe } from '@angular/common';
 
 interface DateRange {
     dateStart: Date;
@@ -18,7 +23,9 @@ interface DateRange {
 @Component({
     selector: 'app-dashboard',
     templateUrl: 'dashboard.page.component.html',
-    styleUrls: ['dashboard.page.component.css']
+    styleUrls: ['dashboard.page.component.css'],
+    standalone: true,
+    imports: [NgIf, ComboBoxModule, SharedDirectivesModule, ButtonGroupModule, ButtonModule, ActiveIssuesComponent, ChartModule, AsyncPipe, DatePipe]
 })
 export class DashboardPageComponent implements OnInit, OnDestroy {
 

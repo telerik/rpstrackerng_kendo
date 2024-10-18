@@ -8,12 +8,32 @@ import { ItemType, PT_ITEM_STATUSES, PT_ITEM_PRIORITIES } from 'src/app/core/con
 import { Observable } from 'rxjs';
 import { Store } from 'src/app/core/state/app-store';
 import { ModalService } from 'src/app/shared/services/modal.service';
+import { NgFor, AsyncPipe } from '@angular/common';
+import { ModalComponent } from '../../../../../shared/components/modal-dialog/modal-dialog.component';
+import { DropDownListModule, SharedDirectivesModule } from '@progress/kendo-angular-dropdowns';
+import { TextBoxModule, SharedModule, SliderModule, TextAreaModule } from '@progress/kendo-angular-inputs';
+import { FormsModule } from '@angular/forms';
+import { LabelComponent, LabelModule } from '@progress/kendo-angular-label';
 
 @Component({
     selector: 'app-item-details',
     templateUrl: 'pt-item-details.component.html',
     styleUrls: ['pt-item-details.component.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FormsModule, 
+        TextBoxModule, 
+        TextAreaModule,
+        LabelModule,
+        SharedModule, 
+        DropDownListModule, 
+        SharedDirectivesModule, 
+        SliderModule, 
+        ModalComponent, 
+
+        NgFor, 
+        AsyncPipe]
 })
 export class PtItemDetailsComponent implements OnInit {
 
