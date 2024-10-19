@@ -5,7 +5,9 @@ import { environment as env } from '../../../environments/environment';
 import { PtUser } from '../../core/models/domain';
 import { Store } from '../state/app-store';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root', // Makes it available globally
+})
 export class PtUserService {
 
     private getUsersUrl(nameFilter?: string): string {

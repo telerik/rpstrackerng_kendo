@@ -14,12 +14,12 @@
     [groupable]="true" [group]="gridState.group" [sort]="gridState.sort" [filterable]="true" [filter]="gridState.filter"
     [selectable]="selectableSettings" (dataStateChange)="onDataStateChange($event)" (selectionChange)="onSelectionChange($event)"
     [height]="410">
-    <kendo-grid-column field="type" title="" [filterable]="false" width="40">
+    <kendo-grid-column field="type" title="" [filterable]="false" [width]="40">
         <ng-template kendoGridCellTemplate let-dataItem>
             <img [src]="getIndicatorImage(dataItem)" class="backlog-icon" />
         </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="assignee" title="Assignee" width="260">
+    <kendo-grid-column field="assignee" title="Assignee" [width]="260">
         <ng-template kendoGridCellTemplate let-dataItem>
             <div>
                 <img [src]="dataItem.assignee.avatar" class="li-avatar rounded mx-auto" />
@@ -27,17 +27,17 @@
             </div>
         </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="title" title="Title" width="300">
+    <kendo-grid-column field="title" title="Title" [width]="300">
     </kendo-grid-column>
-    <kendo-grid-column field="priority" title="Priority" width="100">
+    <kendo-grid-column field="priority" title="Priority" [width]="100">
         <ng-template kendoGridCellTemplate let-dataItem>
             <span [class]="'badge ' + getPriorityClass(dataItem)">{{ dataItem.priority }}</span>
         </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="estimate" title="Estimate" width="100">
+    <kendo-grid-column field="estimate" title="Estimate" [width]="100">
     </kendo-grid-column>
 
-    <kendo-grid-column field="dateCreated" title="Created" width="160" filter="date">
+    <kendo-grid-column field="dateCreated" title="Created" [width]="160" filter="date">
         <ng-template kendoGridCellTemplate let-dataItem>
             <span class="li-date">{{ dataItem.dateCreated | date }}</span>
         </ng-template>

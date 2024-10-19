@@ -1,38 +1,44 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgIf, AsyncPipe } from '@angular/common';
 
 import { Subscription, BehaviorSubject, Observable } from 'rxjs';
 
 import { SelectEvent, TabStripModule } from '@progress/kendo-angular-layout';
 
-import { DetailScreenType } from 'src/app/shared/models/ui/types/detail-screens';
-import { PtItem, PtTask, PtComment, PtUser } from 'src/app/core/models/domain';
+
 import { BacklogService } from '../../services/backlog.service';
-import { PtUserService, NavigationService } from 'src/app/core/services';
-import { PtNewTask, PtTaskUpdate, PtNewComment } from 'src/app/shared/models/dto';
-import { Store } from 'src/app/core/state/app-store';
+
 import { PtItemChitchatComponent } from '../../components/detail/item-chitchat/pt-item-chitchat.component';
 import { PtItemTaskScheduleComponent } from '../../components/detail/item-task-schedule/pt-item-task-schedule.component';
 import { PtItemTasksComponent } from '../../components/detail/item-tasks/pt-item-tasks.component';
-import { PtItemDetailsComponent } from '../../components/detail/item-details/pt-item-details.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { PtItem, PtTask, PtComment, PtUser } from '../../../../core/models/domain';
+import { NavigationService, PtUserService } from '../../../../core/services';
+import { Store } from '../../../../core/state/app-store';
+import { PtNewTask, PtTaskUpdate, PtNewComment } from '../../../../shared/models/dto';
+import { DetailScreenType } from '../../../../shared/models/ui/types/detail-screens';
+import { PtItemFormComponent } from '../../components';
+import { BacklogRepository } from '../../repositories/backlog.repository';
+
+
 
 @Component({
     selector: 'app-backlog-detail-page',
     templateUrl: 'detail.page.component.html',
     standalone: true,
-    imports: [NgIf, TabStripModule, PtItemDetailsComponent, PtItemTasksComponent, PtItemTaskScheduleComponent, PtItemChitchatComponent, AsyncPipe]
+    imports: [NgIf, TabStripModule, PtItemFormComponent, PtItemTasksComponent, PtItemTaskScheduleComponent, PtItemChitchatComponent, AsyncPipe],
+    providers: [BacklogService, BacklogRepository]
 })
 export class DetailPageComponent implements OnInit, OnDestroy {
 
     private itemId = 0;
     private currentItemSub: Subscription | undefined;
-    public selectedDetailsScreen: DetailScreenType = 'details';
+    public selectedDetailsScreen: DetailScreenType = 'form' as DetailScreenType;
 
     public item: PtItem | undefined;
     public tasks$: BehaviorSubject<PtTask[]> = new BehaviorSubject<PtTask[]>([]);
     public comments$: BehaviorSubject<PtComment[]> = new BehaviorSubject<PtComment[]>([]);
-    public currentUser$: Observable<PtUser> = this.store.select<PtUser>('currentUser');
+    public currentUser$: Observable<PtUser>;
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -40,7 +46,10 @@ export class DetailPageComponent implements OnInit, OnDestroy {
         private ptUserService: PtUserService,
         private navigationService: NavigationService,
         private store: Store
-    ) { }
+    ) {
+        this.currentUser$ = this.store.select<PtUser>('currentUser');
+    }
+
 
     public ngOnInit() {
         this.itemId = parseInt(this.activatedRoute.snapshot.params['id'], undefined);
@@ -53,10 +62,10 @@ export class DetailPageComponent implements OnInit, OnDestroy {
             });
 
         const screen = this.activatedRoute.snapshot.params['screen'] as DetailScreenType;
-        if (screen === 'details' || screen === 'tasks' || screen === 'chitchat' || screen === 'schedule') {
+        if (screen === 'form' || screen === 'tasks' || screen === 'chitchat' || screen === 'schedule') {
             this.selectedDetailsScreen = screen;
         } else {
-            this.navigationService.navigate([`/detail/${this.itemId}/details`]);
+            this.navigationService.navigate([`/detail/${this.itemId}`]);
         }
     }
 
@@ -91,6 +100,7 @@ export class DetailPageComponent implements OnInit, OnDestroy {
                             if (task.id !== taskUpdate.task.id) {
                                 return task;
                             }
+                            return null;
                         });
                         this.tasks$.next(newTasks);
                     }

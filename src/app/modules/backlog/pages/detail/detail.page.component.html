@@ -3,11 +3,10 @@
         <h1 class="h2"><span class="k-icon k-i-edit"></span> {{ item.title }}</h1>
     </div>
 
-
     <kendo-tabstrip (tabSelect)="onTabSelect($event)">
-        <kendo-tabstrip-tab title="Details" [selected]="isTabSelected('details')">
+        <kendo-tabstrip-tab title="Form" [selected]="isTabSelected('form')">
             <ng-template kendoTabContent>
-                <app-item-details [item]="item" (itemSaved)="onItemSaved($event)" (usersRequested)="onUsersRequested($event)"></app-item-details>
+                <app-item-form [item]="item" (itemSaved)="onItemSaved($event)" (usersRequested)="onUsersRequested($event)"></app-item-form>
             </ng-template>
         </kendo-tabstrip-tab>
         <kendo-tabstrip-tab title="Tasks" [selected]="isTabSelected('tasks')">

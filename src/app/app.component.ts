@@ -21,7 +21,7 @@ const tempCurrentUser = {
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
     standalone: true,
-    imports: [RouterOutlet, MainMenuComponent, SideMenuComponent]
+    imports: [RouterOutlet, MainMenuComponent, SideMenuComponent],
 })
 export class AppComponent {
   constructor(private store: Store) {

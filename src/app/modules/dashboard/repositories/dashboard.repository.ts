@@ -7,8 +7,9 @@ import { environment as env } from '../../../../environments/environment';
 
 
 import { StatusCounts, PriorityCounts, TypeCounts } from '../models';
-import { DashboardFilter } from 'src/app/shared/models/dto/stats/dashboard-filter';
-import { PtItem } from 'src/app/core/models/domain';
+import { PtItem } from '../../../core/models/domain';
+import { DashboardFilter } from '../../../shared/models/dto/stats/dashboard-filter';
+
 
 export interface ItemsForMonth {
     closed: PtItem[];

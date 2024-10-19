@@ -3,17 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Subscription, BehaviorSubject } from 'rxjs';
 
-import { NavigationService } from 'src/app/core/services';
-import { BacklogService } from '../../services/backlog.service';
-import { PtItem } from 'src/app/core/models/domain';
-import { PresetType } from 'src/app/core/models/domain/types';
-import { PtNewItem } from 'src/app/shared/models/dto';
-import { EMPTY_STRING } from 'src/app/core/helpers';
-import { ItemType } from 'src/app/core/constants';
-import { Store } from 'src/app/core/state/app-store';
-import { ModalService } from 'src/app/shared/services/modal.service';
+
 import { PageChangeEvent, GridDataResult, SelectableSettings, SelectionEvent, GridModule, SharedModule, BodyModule } from '@progress/kendo-angular-grid';
-import { PriorityEnum } from 'src/app/core/models/domain/enums';
+
 import { SortDescriptor, orderBy, State, process } from '@progress/kendo-data-query';
 import { plusIcon, SVGIcon } from "@progress/kendo-svg-icons";
 import { NgFor, DatePipe } from '@angular/common';
@@ -23,13 +15,25 @@ import { FormsModule } from '@angular/forms';
 import { ModalComponent } from '../../../../shared/components/modal-dialog/modal-dialog.component';
 import { ButtonModule } from '@progress/kendo-angular-buttons';
 import { PresetFilterComponent } from '../../../../shared/components/preset-filter/preset-filter.component';
+import { ItemType } from '../../../../core/constants';
+import { EMPTY_STRING } from '../../../../core/helpers';
+import { PtItem } from '../../../../core/models/domain';
+import { PriorityEnum } from '../../../../core/models/domain/enums';
+import { PresetType } from '../../../../core/models/domain/types';
+import { Store } from '../../../../core/state/app-store';
+import { PtNewItem } from '../../../../shared/models/dto';
+import { ModalService } from '../../../../shared/services/modal.service';
+import { BacklogService } from '../../services/backlog.service';
+import { BacklogRepository } from '../../repositories/backlog.repository';
+import { NavigationService } from '../../../../core/services';
 
 @Component({
     selector: 'app-backlog',
     templateUrl: 'backlog.page.component.html',
     styleUrls: ['backlog.page.component.css'],
     standalone: true,
-    imports: [PresetFilterComponent, ButtonModule, GridModule, SharedModule, BodyModule, ModalComponent, FormsModule, FloatingLabelModule, TextBoxModule, NgFor, DatePipe]
+    imports: [PresetFilterComponent, ButtonModule, GridModule, SharedModule, BodyModule, ModalComponent, FormsModule, FloatingLabelModule, TextBoxModule, NgFor, DatePipe],
+    providers: [BacklogService, BacklogRepository]
 })
 export class BacklogPageComponent implements OnInit {
 

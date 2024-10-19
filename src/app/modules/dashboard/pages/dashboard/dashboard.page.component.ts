@@ -2,18 +2,18 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { BehaviorSubject, Subscription, Observable } from 'rxjs';
 import { DashboardService } from '../../services/dashboard.service';
-import { FilteredIssues } from '../../repositories/dashboard.repository';
-import { Store } from 'src/app/core/state/app-store';
-import { StatusCounts } from '../../models';
-import { DashboardFilter } from 'src/app/shared/models/dto/stats/dashboard-filter';
+import { DashboardRepository, FilteredIssues } from '../../repositories/dashboard.repository';
 
-import { PtUserService } from 'src/app/core/services';
-import { PtUser } from 'src/app/core/models/domain';
 import { ChartModule } from '@progress/kendo-angular-charts';
 import { ActiveIssuesComponent } from '../../components/active-issues/active-issues.component';
 import { ButtonGroupModule, ButtonModule } from '@progress/kendo-angular-buttons';
 import { ComboBoxModule, SharedDirectivesModule } from '@progress/kendo-angular-dropdowns';
 import { NgIf, AsyncPipe, DatePipe } from '@angular/common';
+import { PtUser } from '../../../../core/models/domain';
+import { PtUserService } from '../../../../core/services';
+import { Store } from '../../../../core/state/app-store';
+import { DashboardFilter } from '../../../../shared/models/dto/stats/dashboard-filter';
+import { StatusCounts } from '../../models';
 
 interface DateRange {
     dateStart: Date;
@@ -25,7 +25,8 @@ interface DateRange {
     templateUrl: 'dashboard.page.component.html',
     styleUrls: ['dashboard.page.component.css'],
     standalone: true,
-    imports: [NgIf, ComboBoxModule, SharedDirectivesModule, ButtonGroupModule, ButtonModule, ActiveIssuesComponent, ChartModule, AsyncPipe, DatePipe]
+    imports: [NgIf, ComboBoxModule, SharedDirectivesModule, ButtonGroupModule, ButtonModule, ActiveIssuesComponent, ChartModule, AsyncPipe, DatePipe],
+    providers: [DashboardService, DashboardRepository],
 })
 export class DashboardPageComponent implements OnInit, OnDestroy {
 
@@ -42,7 +43,8 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
         openItemsCount: 0
     });
 
-    public users$: Observable<PtUser[]> = this.store.select<PtUser[]>('users');
+    public users$: Observable<PtUser[]>;
+
     public issuesAll$: BehaviorSubject<FilteredIssues> = new BehaviorSubject<FilteredIssues>({
         categories: [],
         items: []
@@ -64,7 +66,9 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
         private dashboardService: DashboardService,
         private userService: PtUserService,
         private store: Store
-    ) { }
+    ) {
+        this.users$ = this.store.select<PtUser[]>('users');
+     }
 
     public ngOnInit() {
         this.issuesAll$.subscribe((issues: FilteredIssues) => {

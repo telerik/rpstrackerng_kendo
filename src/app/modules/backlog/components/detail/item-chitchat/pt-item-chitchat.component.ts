@@ -1,11 +1,12 @@
 import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, ViewContainerRef } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgFor, AsyncPipe, DatePipe } from '@angular/common';
+
+import { BehaviorSubject } from 'rxjs';
 
 import { PtItem, PtComment, PtUser, PtTask } from '../../../../../core/models/domain';
 import { PtNewComment } from '../../../../../shared/models/dto';
 import { EMPTY_STRING } from '../../../../../core/helpers/string-helpers';
-import { BehaviorSubject } from 'rxjs';
-import { NgFor, AsyncPipe, DatePipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-item-chitchat',
@@ -27,6 +28,7 @@ export class PtItemChitchatComponent {
         if (this.currentUser) {
             return this.currentUser.avatar;
         }
+        return EMPTY_STRING;
     }
 
     public onAddTapped() {
