@@ -42,8 +42,4 @@ export class PtItemChitchatComponent {
         this.addNewComment.emit(newComment);
         this.newCommentText = EMPTY_STRING;
     }
-
-    public onTextFieldTap() {
-
-    }
 }
