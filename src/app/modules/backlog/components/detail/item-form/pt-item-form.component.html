@@ -3,16 +3,14 @@
         <label class="col-sm-2 col-form-label">Title</label>
         <div class="col-sm-10">
 
-            <kendo-label class="k-form" text="Title">
-                <kendo-textbox
-                    [style.width.px]="200"
-                    [style.marginLeft.px]="5"
-                    name="title"
-                    [(ngModel)]="itemForm.title"
-                    (blur)="onBlurTextField()"
-                    required
-                ></kendo-textbox>
-            </kendo-label>
+            <kendo-textbox
+                [style.width.px]="400"
+                [style.marginBottom.px]="5"
+                name="title"
+                [(ngModel)]="itemForm.title"
+                (blur)="onBlurTextField()"
+                required
+            ></kendo-textbox>
 
         </div>
     </div>
@@ -22,7 +20,8 @@
         <div class="col-sm-10">
 
             <kendo-textarea
-                [style.width.px]="200"
+                [style.width.px]="400"
+                [style.marginBottom.px]="5"
                 name="description"
                 [(ngModel)]="itemForm.description"
                 placeholder="Description"
