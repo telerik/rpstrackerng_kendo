@@ -1,13 +1,12 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, EventEmitter, Output } from '@angular/core';
-
-
-import { NgFor, AsyncPipe } from '@angular/common';
-import { ModalComponent } from '../../../../../shared/components/modal-dialog/modal-dialog.component';
-import { DropDownListModule, SharedDirectivesModule } from '@progress/kendo-angular-dropdowns';
-import { TextBoxModule, SharedModule, SliderModule, TextAreaModule } from '@progress/kendo-angular-inputs';
 import { FormsModule } from '@angular/forms';
-import { LabelModule } from '@progress/kendo-angular-label';
+import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
+
+import { KENDO_DROPDOWNLIST } from '@progress/kendo-angular-dropdowns';
+import { KENDO_TEXTBOX, KENDO_SLIDER, KENDO_TEXTAREA } from '@progress/kendo-angular-inputs';
+
+import { ModalComponent } from '../../../../../shared/components/modal-dialog/modal-dialog.component';
 import { ItemType, PT_ITEM_STATUSES, PT_ITEM_PRIORITIES } from '../../../../../core/constants';
 import { PtItem, PtUser } from '../../../../../core/models/domain';
 import { PriorityEnum } from '../../../../../core/models/domain/enums';
@@ -24,16 +23,11 @@ import { ModalService } from '../../../../../shared/services/modal.service';
     standalone: true,
     imports: [
         FormsModule, 
-        TextBoxModule, 
-        TextAreaModule,
-        LabelModule,
-        SharedModule, 
-        DropDownListModule, 
-        SharedDirectivesModule, 
-        SliderModule, 
+        KENDO_TEXTBOX, 
+        KENDO_TEXTAREA,
+        KENDO_DROPDOWNLIST, 
+        KENDO_SLIDER, 
         ModalComponent, 
-
-        NgFor, 
         AsyncPipe]
 })
 export class PtItemFormComponent implements OnInit {

@@ -1,10 +1,10 @@
-import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, ViewContainerRef } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgFor, AsyncPipe, DatePipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 
 import { BehaviorSubject } from 'rxjs';
 
-import { PtItem, PtComment, PtUser, PtTask } from '../../../../../core/models/domain';
+import { PtComment, PtUser } from '../../../../../core/models/domain';
 import { PtNewComment } from '../../../../../shared/models/dto';
 import { EMPTY_STRING } from '../../../../../core/helpers/string-helpers';
 
@@ -14,7 +14,7 @@ import { EMPTY_STRING } from '../../../../../core/helpers/string-helpers';
     styleUrls: ['pt-item-chitchat.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [FormsModule, NgFor, AsyncPipe, DatePipe]
+    imports: [FormsModule, AsyncPipe, DatePipe]
 })
 export class PtItemChitchatComponent {
 

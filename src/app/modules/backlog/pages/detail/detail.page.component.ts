@@ -1,14 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 import { Subscription, BehaviorSubject, Observable } from 'rxjs';
 
-import { SelectEvent, TabStripModule } from '@progress/kendo-angular-layout';
+import { SelectEvent, KENDO_TABSTRIP } from '@progress/kendo-angular-layout';
 
 
 import { BacklogService } from '../../services/backlog.service';
-
 import { PtItemChitchatComponent } from '../../components/detail/item-chitchat/pt-item-chitchat.component';
 import { PtItemTaskScheduleComponent } from '../../components/detail/item-task-schedule/pt-item-task-schedule.component';
 import { PtItemTasksComponent } from '../../components/detail/item-tasks/pt-item-tasks.component';
@@ -26,7 +25,7 @@ import { BacklogRepository } from '../../repositories/backlog.repository';
     selector: 'app-backlog-detail-page',
     templateUrl: 'detail.page.component.html',
     standalone: true,
-    imports: [NgIf, TabStripModule, PtItemFormComponent, PtItemTasksComponent, PtItemTaskScheduleComponent, PtItemChitchatComponent, AsyncPipe],
+    imports: [KENDO_TABSTRIP, PtItemFormComponent, PtItemTasksComponent, PtItemTaskScheduleComponent, PtItemChitchatComponent, AsyncPipe],
     providers: [BacklogService, BacklogRepository]
 })
 export class DetailPageComponent implements OnInit, OnDestroy {

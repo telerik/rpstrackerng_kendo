@@ -1,19 +1,18 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { Subscription, BehaviorSubject } from 'rxjs';
 
-
-import { PageChangeEvent, GridDataResult, SelectableSettings, SelectionEvent, GridModule, SharedModule, BodyModule } from '@progress/kendo-angular-grid';
-
-import { SortDescriptor, orderBy, State, process } from '@progress/kendo-data-query';
+import { PageChangeEvent, GridDataResult, SelectableSettings, SelectionEvent, KENDO_GRID } from '@progress/kendo-angular-grid';
+import { SortDescriptor, State, process } from '@progress/kendo-data-query';
 import { plusIcon, SVGIcon } from "@progress/kendo-svg-icons";
-import { NgFor, DatePipe } from '@angular/common';
-import { TextBoxModule } from '@progress/kendo-angular-inputs';
-import { FloatingLabelModule } from '@progress/kendo-angular-label';
-import { FormsModule } from '@angular/forms';
+import { KENDO_TEXTBOX } from '@progress/kendo-angular-inputs';
+import { KENDO_FLOATINGLABEL } from '@progress/kendo-angular-label';
+import { KENDO_BUTTON } from '@progress/kendo-angular-buttons';
+
 import { ModalComponent } from '../../../../shared/components/modal-dialog/modal-dialog.component';
-import { ButtonModule } from '@progress/kendo-angular-buttons';
 import { PresetFilterComponent } from '../../../../shared/components/preset-filter/preset-filter.component';
 import { ItemType } from '../../../../core/constants';
 import { EMPTY_STRING } from '../../../../core/helpers';
@@ -32,7 +31,7 @@ import { NavigationService } from '../../../../core/services';
     templateUrl: 'backlog.page.component.html',
     styleUrls: ['backlog.page.component.css'],
     standalone: true,
-    imports: [PresetFilterComponent, ButtonModule, GridModule, SharedModule, BodyModule, ModalComponent, FormsModule, FloatingLabelModule, TextBoxModule, NgFor, DatePipe],
+    imports: [PresetFilterComponent, KENDO_BUTTON, KENDO_GRID, ModalComponent, FormsModule, KENDO_FLOATINGLABEL, KENDO_TEXTBOX, DatePipe],
     providers: [BacklogService, BacklogRepository]
 })
 export class BacklogPageComponent implements OnInit {

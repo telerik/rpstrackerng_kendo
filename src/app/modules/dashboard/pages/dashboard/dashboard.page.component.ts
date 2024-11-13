@@ -1,14 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { AsyncPipe, DatePipe } from '@angular/common';
 
 import { BehaviorSubject, Subscription, Observable } from 'rxjs';
+
+import { KENDO_CHART } from '@progress/kendo-angular-charts';
+import { KENDO_BUTTONGROUP, KENDO_BUTTON } from '@progress/kendo-angular-buttons';
+import { KENDO_COMBOBOX } from '@progress/kendo-angular-dropdowns';
+
 import { DashboardService } from '../../services/dashboard.service';
 import { DashboardRepository, FilteredIssues } from '../../repositories/dashboard.repository';
-
-import { ChartModule } from '@progress/kendo-angular-charts';
 import { ActiveIssuesComponent } from '../../components/active-issues/active-issues.component';
-import { ButtonGroupModule, ButtonModule } from '@progress/kendo-angular-buttons';
-import { ComboBoxModule, SharedDirectivesModule } from '@progress/kendo-angular-dropdowns';
-import { NgIf, AsyncPipe, DatePipe } from '@angular/common';
 import { PtUser } from '../../../../core/models/domain';
 import { PtUserService } from '../../../../core/services';
 import { Store } from '../../../../core/state/app-store';
@@ -25,7 +26,7 @@ interface DateRange {
     templateUrl: 'dashboard.page.component.html',
     styleUrls: ['dashboard.page.component.css'],
     standalone: true,
-    imports: [NgIf, ComboBoxModule, SharedDirectivesModule, ButtonGroupModule, ButtonModule, ActiveIssuesComponent, ChartModule, AsyncPipe, DatePipe],
+    imports: [KENDO_COMBOBOX, KENDO_BUTTONGROUP, KENDO_BUTTON, ActiveIssuesComponent, KENDO_CHART, AsyncPipe, DatePipe],
     providers: [DashboardService, DashboardRepository],
 })
 export class DashboardPageComponent implements OnInit, OnDestroy {

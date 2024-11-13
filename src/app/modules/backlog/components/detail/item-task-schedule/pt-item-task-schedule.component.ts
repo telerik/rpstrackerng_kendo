@@ -1,12 +1,13 @@
 import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import { BehaviorSubject } from 'rxjs';
+
+import { SchedulerEvent, SaveEvent, RemoveEvent, KENDO_SCHEDULER, MultiDayViewModule, MonthViewModule, TimelineViewModule } from '@progress/kendo-angular-scheduler';
+
 import { PtTask } from '../../../../../core/models/domain';
 import { PtNewTask, PtTaskUpdate } from '../../../../../shared/models/dto';
 import { EMPTY_STRING } from '../../../../../core/helpers/string-helpers';
-import { BehaviorSubject } from 'rxjs';
-import { SchedulerEvent, SaveEvent, RemoveEvent, KENDO_SCHEDULER, MultiDayViewModule, MonthViewModule, TimelineViewModule } from '@progress/kendo-angular-scheduler';
-
 
 @Component({
     selector: 'app-item-task-schedule',

@@ -99,13 +99,15 @@
     </div>
     <div class="modal-body">
         <ul class="list-group list-group-flush">
-            <li *ngFor="let user of users$ | async" class="list-group-item d-flex justify-content-between align-items-center"
+            @for (user of users$ | async; track user.id) {
+                <li class="list-group-item d-flex justify-content-between align-items-center"
                 (click)="selectUser(user, 'custom-modal-1')">
-                <span>{{ user?.fullName }}</span>
-                <span class="badge ">
-                    <img [src]="user?.avatar" class="li-avatar rounded mx-auto d-block" />
-                </span>
-            </li>
+                    <span>{{ user?.fullName }}</span>
+                    <span class="badge ">
+                        <img [src]="user?.avatar" class="li-avatar rounded mx-auto d-block" />
+                    </span>
+                </li>
+            }
         </ul>
     </div>
     <div class="modal-footer">

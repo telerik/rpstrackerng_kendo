@@ -88,7 +88,9 @@
             <div class="form-group">
                     <kendo-floatinglabel text="Item Type" style="width:100%;">
                         <select class="form-control" [(ngModel)]="newItem.type" name="itemType">
-                            <option *ngFor="let itemType of itemTypesProvider" [ngValue]="itemType">{{itemType}}</option>
+                            @for (itemType of itemTypesProvider; track itemType) {
+                                <option [ngValue]="itemType">{{itemType}}</option>
+                            }
                         </select>
                     </kendo-floatinglabel>
             </div>
