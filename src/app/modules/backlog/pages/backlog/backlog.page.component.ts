@@ -30,7 +30,6 @@ import { NavigationService } from '../../../../core/services';
     selector: 'app-backlog',
     templateUrl: 'backlog.page.component.html',
     styleUrls: ['backlog.page.component.css'],
-    standalone: true,
     imports: [PresetFilterComponent, KENDO_BUTTON, KENDO_GRID, ModalComponent, FormsModule, KENDO_FLOATINGLABEL, KENDO_TEXTBOX, DatePipe],
     providers: [BacklogService, BacklogRepository]
 })

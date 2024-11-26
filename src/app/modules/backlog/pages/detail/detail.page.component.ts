@@ -24,7 +24,6 @@ import { BacklogRepository } from '../../repositories/backlog.repository';
 @Component({
     selector: 'app-backlog-detail-page',
     templateUrl: 'detail.page.component.html',
-    standalone: true,
     imports: [KENDO_TABSTRIP, PtItemFormComponent, PtItemTasksComponent, PtItemTaskScheduleComponent, PtItemChitchatComponent, AsyncPipe],
     providers: [BacklogService, BacklogRepository]
 })

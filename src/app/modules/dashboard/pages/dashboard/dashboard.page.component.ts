@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AsyncPipe, DatePipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 import { BehaviorSubject, Subscription, Observable } from 'rxjs';
 
@@ -25,9 +25,8 @@ interface DateRange {
     selector: 'app-dashboard',
     templateUrl: 'dashboard.page.component.html',
     styleUrls: ['dashboard.page.component.css'],
-    standalone: true,
-    imports: [KENDO_COMBOBOX, KENDO_BUTTONGROUP, KENDO_BUTTON, ActiveIssuesComponent, KENDO_CHART, AsyncPipe, DatePipe],
-    providers: [DashboardService, DashboardRepository],
+    imports: [KENDO_COMBOBOX, KENDO_BUTTONGROUP, KENDO_BUTTON, ActiveIssuesComponent, KENDO_CHART, AsyncPipe],
+    providers: [DashboardService, DashboardRepository]
 })
 export class DashboardPageComponent implements OnInit, OnDestroy {
 

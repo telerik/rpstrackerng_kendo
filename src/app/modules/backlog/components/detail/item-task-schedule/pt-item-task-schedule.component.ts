@@ -14,7 +14,6 @@ import { EMPTY_STRING } from '../../../../../core/helpers/string-helpers';
     templateUrl: 'pt-item-task-schedule.component.html',
     styleUrls: ['pt-item-task-schedule.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [KENDO_SCHEDULER, MultiDayViewModule, MonthViewModule, TimelineViewModule]
 })
 export class PtItemTaskScheduleComponent implements OnInit {

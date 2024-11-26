@@ -6,8 +6,7 @@ import { StatusCounts } from '../../models';
     selector: 'app-active-issues',
     templateUrl: 'active-issues.component.html',
     styleUrls: ['active-issues.component.css'],
-    standalone: true,
-    imports: [DecimalPipe],
+    imports: [DecimalPipe]
 })
 export class ActiveIssuesComponent {
 

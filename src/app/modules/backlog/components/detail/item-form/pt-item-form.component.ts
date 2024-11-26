@@ -20,15 +20,15 @@ import { ModalService } from '../../../../../shared/services/modal.service';
     templateUrl: 'pt-item-form.component.html',
     styleUrls: ['pt-item-form.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
-        FormsModule, 
-        KENDO_TEXTBOX, 
+        FormsModule,
+        KENDO_TEXTBOX,
         KENDO_TEXTAREA,
-        KENDO_DROPDOWNLIST, 
-        KENDO_SLIDER, 
-        ModalComponent, 
-        AsyncPipe]
+        KENDO_DROPDOWNLIST,
+        KENDO_SLIDER,
+        ModalComponent,
+        AsyncPipe
+    ]
 })
 export class PtItemFormComponent implements OnInit {
 
