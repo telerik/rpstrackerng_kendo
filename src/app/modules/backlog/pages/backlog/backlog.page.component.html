@@ -75,13 +75,13 @@
         <form>
             <div class="form-group">
                 <kendo-floatinglabel text="Title" style="width:100%;">
-                    <input kendoTextBox [(ngModel)]="newItem.title" name="title"/>
+                    <kendo-textbox [(ngModel)]="newItem.title" name="title"></kendo-textbox>
                 </kendo-floatinglabel>
             </div>
 
             <div class="form-group">
                 <kendo-floatinglabel text="Description" style="width:100%;">
-                    <textarea kendoTextArea [(ngModel)]="newItem.description" name="description"></textarea>
+                    <kendo-textarea [(ngModel)]="newItem.description" name="description"></kendo-textarea>
                 </kendo-floatinglabel>
             </div>
 

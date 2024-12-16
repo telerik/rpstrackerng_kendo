@@ -8,7 +8,7 @@ import { Subscription, BehaviorSubject } from 'rxjs';
 import { PageChangeEvent, GridDataResult, SelectableSettings, SelectionEvent, KENDO_GRID } from '@progress/kendo-angular-grid';
 import { SortDescriptor, State, process } from '@progress/kendo-data-query';
 import { plusIcon, SVGIcon } from "@progress/kendo-svg-icons";
-import { KENDO_TEXTBOX } from '@progress/kendo-angular-inputs';
+import { KENDO_TEXTAREA, KENDO_TEXTBOX } from '@progress/kendo-angular-inputs';
 import { KENDO_FLOATINGLABEL } from '@progress/kendo-angular-label';
 import { KENDO_BUTTON } from '@progress/kendo-angular-buttons';
 
@@ -30,7 +30,7 @@ import { NavigationService } from '../../../../core/services';
     selector: 'app-backlog',
     templateUrl: 'backlog.page.component.html',
     styleUrls: ['backlog.page.component.css'],
-    imports: [PresetFilterComponent, KENDO_BUTTON, KENDO_GRID, ModalComponent, FormsModule, KENDO_FLOATINGLABEL, KENDO_TEXTBOX, DatePipe],
+    imports: [PresetFilterComponent, KENDO_BUTTON, KENDO_GRID, ModalComponent, FormsModule, KENDO_FLOATINGLABEL, KENDO_TEXTBOX, KENDO_TEXTAREA, DatePipe],
     providers: [BacklogService, BacklogRepository]
 })
 export class BacklogPageComponent implements OnInit {
