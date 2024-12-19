@@ -20,10 +20,13 @@
                     (valueChange)="userFilterValueChange($event)" placeholder="User" style="width: 250px;">
 
                     <ng-template kendoComboBoxItemTemplate let-userItem>
-
-                        <div class="row" style="margin-left:10px;">
-                            <img class="li-avatar rounded mx-auto d-block" [src]="userItem.avatar" />
-                            <span style="margin-left:10px;">{{ userItem.fullName }}</span>
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <img class="li-avatar rounded" [src]="userItem.avatar" />
+                            </div>
+                            <div class="col-auto">
+                                <span>{{ userItem.fullName }}</span>
+                            </div>
                         </div>
                     </ng-template>
 
