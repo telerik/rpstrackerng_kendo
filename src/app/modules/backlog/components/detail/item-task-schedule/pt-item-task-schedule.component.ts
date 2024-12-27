@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { BehaviorSubject } from 'rxjs';
 
-import { SchedulerEvent, SaveEvent, RemoveEvent, KENDO_SCHEDULER } from '@progress/kendo-angular-scheduler';
+import { SchedulerEvent, SaveEvent, RemoveEvent, CreateFormGroupArgs, KENDO_SCHEDULER } from '@progress/kendo-angular-scheduler';
 
 import { PtTask } from '../../../../../core/models/domain';
 import { PtNewTask, PtTaskUpdate } from '../../../../../shared/models/dto';
@@ -55,8 +55,8 @@ export class PtItemTaskScheduleComponent implements OnInit {
         });
     }
 
-    public createFormGroup(args: any): FormGroup {
-        const ev = args.event;
+    public createFormGroup(args: CreateFormGroupArgs): FormGroup {
+        const ev = args.dataItem;
 
         this.formGroup = this.formBuilder.group({
             'id': args.isNew ? this.getNextId() : ev.id,
