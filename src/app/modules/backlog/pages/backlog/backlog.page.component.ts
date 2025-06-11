@@ -1,26 +1,37 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { Subscription, BehaviorSubject } from 'rxjs';
 
-import { NavigationService } from 'src/app/core/services';
-import { BacklogService } from '../../services/backlog.service';
-import { PtItem } from 'src/app/core/models/domain';
-import { PresetType } from 'src/app/core/models/domain/types';
-import { PtNewItem } from 'src/app/shared/models/dto';
-import { EMPTY_STRING } from 'src/app/core/helpers';
-import { ItemType } from 'src/app/core/constants';
-import { Store } from 'src/app/core/state/app-store';
-import { ModalService } from 'src/app/shared/services/modal.service';
-import { PageChangeEvent, GridDataResult, SelectableSettings, SelectionEvent } from '@progress/kendo-angular-grid';
-import { PriorityEnum } from 'src/app/core/models/domain/enums';
-import { SortDescriptor, orderBy, State, process } from '@progress/kendo-data-query';
+import { PageChangeEvent, GridDataResult, SelectableSettings, SelectionEvent, KENDO_GRID } from '@progress/kendo-angular-grid';
+import { SortDescriptor, State, process } from '@progress/kendo-data-query';
 import { plusIcon, SVGIcon } from "@progress/kendo-svg-icons";
+import { KENDO_TEXTAREA, KENDO_TEXTBOX } from '@progress/kendo-angular-inputs';
+import { KENDO_FLOATINGLABEL } from '@progress/kendo-angular-label';
+import { KENDO_BUTTON } from '@progress/kendo-angular-buttons';
+
+import { ModalComponent } from '../../../../shared/components/modal-dialog/modal-dialog.component';
+import { PresetFilterComponent } from '../../../../shared/components/preset-filter/preset-filter.component';
+import { ItemType } from '../../../../core/constants';
+import { EMPTY_STRING } from '../../../../core/helpers';
+import { PtItem } from '../../../../core/models/domain';
+import { PriorityEnum } from '../../../../core/models/domain/enums';
+import { PresetType } from '../../../../core/models/domain/types';
+import { Store } from '../../../../core/state/app-store';
+import { PtNewItem } from '../../../../shared/models/dto';
+import { ModalService } from '../../../../shared/services/modal.service';
+import { BacklogService } from '../../services/backlog.service';
+import { BacklogRepository } from '../../repositories/backlog.repository';
+import { NavigationService } from '../../../../core/services';
 
 @Component({
     selector: 'app-backlog',
     templateUrl: 'backlog.page.component.html',
-    styleUrls: ['backlog.page.component.css']
+    styleUrls: ['backlog.page.component.css'],
+    imports: [PresetFilterComponent, KENDO_BUTTON, KENDO_GRID, ModalComponent, FormsModule, KENDO_FLOATINGLABEL, KENDO_TEXTBOX, KENDO_TEXTAREA, DatePipe],
+    providers: [BacklogService, BacklogRepository]
 })
 export class BacklogPageComponent implements OnInit {
 
@@ -103,7 +114,6 @@ export class BacklogPageComponent implements OnInit {
         this.itemsSub = this.backlogService.getItems(this.currentPreset)
             .subscribe((items: PtItem[]) => {
                 this.items$.next(items);
-
             });
     }
 

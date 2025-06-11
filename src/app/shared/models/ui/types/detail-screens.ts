@@ -1,1 +1,1 @@
-export type DetailScreenType = 'details' | 'tasks' | 'schedule' | 'chitchat';
+export type DetailScreenType = 'form' | 'tasks' | 'schedule' | 'chitchat';

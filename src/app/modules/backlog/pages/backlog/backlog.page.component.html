@@ -1,25 +1,45 @@
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-    <h1 class="h2">Backlog</h1>
-    <div class="btn-toolbar mb-2 mb-md-0">
-        <app-preset-filter></app-preset-filter>
-
-        <div class="btn-group mr-2">
-            <button kendoButton type="button" (click)="onAddTap('custom-modal-1')" class="btn btn-sm btn-outline-secondary" [svgIcon]="svgPlus">Add</button>
+<div class="container">
+    <div class="row align-items-center justify-content-between">
+      <!-- Frame13 on the left -->
+      <div class="col-auto">
+        <div class="Frame13 d-flex flex-column align-items-start gap-2" style="width: 700px;">
+          <div class="Label text-center" style="color: #3D3D3D; font-size: 40px; font-family: Roboto; font-weight: 500;">
+            Backlog
+          </div>
         </div>
-
+      </div>
+  
+      <!-- Tools on the right -->
+      <div class="col-auto">
+        <div class="Tools d-flex gap-3">
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <app-preset-filter></app-preset-filter>
+            
+                    <div class="btn-group mr-2">
+                        <button kendoButton type="button" (click)="onAddTap('custom-modal-1')" class="btn btn-sm btn-outline-secondary" [svgIcon]="svgPlus">Add</button>
+                    </div>
+            
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 </div>
+
 
 <kendo-grid [data]="gridData" [pageSize]="gridState.take" [skip]="gridState.skip" [pageable]="true" [sortable]="true"
     [groupable]="true" [group]="gridState.group" [sort]="gridState.sort" [filterable]="true" [filter]="gridState.filter"
     [selectable]="selectableSettings" (dataStateChange)="onDataStateChange($event)" (selectionChange)="onSelectionChange($event)"
     [height]="410">
-    <kendo-grid-column field="type" title="" [filterable]="false" width="40">
+    <kendo-grid-column field="type" title="" [filterable]="false" [width]="40">
         <ng-template kendoGridCellTemplate let-dataItem>
             <img [src]="getIndicatorImage(dataItem)" class="backlog-icon" />
         </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="assignee" title="Assignee" width="260">
+    <kendo-grid-column field="assignee" title="Assignee" [width]="260">
         <ng-template kendoGridCellTemplate let-dataItem>
             <div>
                 <img [src]="dataItem.assignee.avatar" class="li-avatar rounded mx-auto" />
@@ -27,17 +47,17 @@
             </div>
         </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="title" title="Title" width="300">
+    <kendo-grid-column field="title" title="Title" [width]="300">
     </kendo-grid-column>
-    <kendo-grid-column field="priority" title="Priority" width="100">
+    <kendo-grid-column field="priority" title="Priority" [width]="100">
         <ng-template kendoGridCellTemplate let-dataItem>
             <span [class]="'badge ' + getPriorityClass(dataItem)">{{ dataItem.priority }}</span>
         </ng-template>
     </kendo-grid-column>
-    <kendo-grid-column field="estimate" title="Estimate" width="100">
+    <kendo-grid-column field="estimate" title="Estimate" [width]="100">
     </kendo-grid-column>
 
-    <kendo-grid-column field="dateCreated" title="Created" width="160" filter="date">
+    <kendo-grid-column field="dateCreated" title="Created" [width]="160" filter="date">
         <ng-template kendoGridCellTemplate let-dataItem>
             <span class="li-date">{{ dataItem.dateCreated | date }}</span>
         </ng-template>
@@ -46,30 +66,31 @@
 
 
 <custom-modal id="custom-modal-1">
+
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Add New Item</h4>
-        <button type="button" class="close" aria-label="Close" (click)="closeModal('custom-modal-1')">
-            <span aria-hidden="true">&times;</span>
-        </button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="closeModal('custom-modal-1')"></button>
     </div>
     <div class="modal-body">
         <form>
             <div class="form-group">
                 <kendo-floatinglabel text="Title" style="width:100%;">
-                    <input kendoTextBox [(ngModel)]="newItem.title" name="title"/>
+                    <kendo-textbox [(ngModel)]="newItem.title" name="title"></kendo-textbox>
                 </kendo-floatinglabel>
             </div>
 
             <div class="form-group">
                 <kendo-floatinglabel text="Description" style="width:100%;">
-                    <textarea kendoTextArea [(ngModel)]="newItem.description" name="description"></textarea>
+                    <kendo-textarea [(ngModel)]="newItem.description" name="description"></kendo-textarea>
                 </kendo-floatinglabel>
             </div>
 
             <div class="form-group">
                     <kendo-floatinglabel text="Item Type" style="width:100%;">
                         <select class="form-control" [(ngModel)]="newItem.type" name="itemType">
-                            <option *ngFor="let itemType of itemTypesProvider" [ngValue]="itemType">{{itemType}}</option>
+                            @for (itemType of itemTypesProvider; track itemType) {
+                                <option [ngValue]="itemType">{{itemType}}</option>
+                            }
                         </select>
                     </kendo-floatinglabel>
             </div>

@@ -1,80 +1,137 @@
 <div class="dashboard">
 
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-
-        <div class="col-md order-md-first text-center text-md-left">
-            <h2>
-                <span class="small text-uppercase text-muted d-block">Statistics</span>
-                <span *ngIf="filteredDateStart && filteredDateEnd">{{ filteredDateStart | date }} - {{ filteredDateEnd
-                    | date
-                    }}</span>
-            </h2>
-        </div>
-
-        <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group mr-2">
-
-                <kendo-combobox [data]="users$ | async" textField="fullName" valueField="id" (open)="userFilterOpen()"
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+          <!-- Frame13 on the left -->
+          <div class="col-auto">
+            <div class="Frame13 d-flex flex-column align-items-start gap-2">
+              <div class="Label text-center" style="color: #3D3D3D; font-size: 40px; font-family: Roboto; font-weight: 500;">
+                Dashboard
+              </div>
+            </div>
+          </div>
+      
+          <!-- Tools on the right -->
+          <div class="col-auto">
+            <div class="Tools d-flex gap-3">
+              <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group mr-2">
+                    <kendo-combobox [data]="users$ | async" textField="fullName" valueField="id" (open)="userFilterOpen()"
                     (valueChange)="userFilterValueChange($event)" placeholder="User" style="width: 250px;">
 
                     <ng-template kendoComboBoxItemTemplate let-userItem>
-
-                        <div class="row" style="margin-left:10px;">
-                            <img class="li-avatar rounded mx-auto d-block" [src]="userItem.avatar" />
-                            <span style="margin-left:10px;">{{ userItem.fullName }}</span>
+                        <div class="row align-items-center">
+                            <div class="col-auto">
+                                <img class="li-avatar rounded" [src]="userItem.avatar" />
+                            </div>
+                            <div class="col-auto">
+                                <span>{{ userItem.fullName }}</span>
+                            </div>
                         </div>
                     </ng-template>
 
-                </kendo-combobox>
-
-                <kendo-buttongroup selection="single">
-                    <button kendoButton toggleable="true" icon="calendar" type="button" class="btn btn-sm btn-outline-secondary"
-                        (click)="onMonthRangeTap(3)">3
-                        Months</button>
-                    <button kendoButton toggleable="true" icon="calendar" type="button" class="btn btn-sm btn-outline-secondary"
-                        (click)="onMonthRangeTap(6)">6
-                        Months</button>
-                    <button kendoButton toggleable="true" icon="calendar" type="button" class="btn btn-sm btn-outline-secondary"
-                        (click)="onMonthRangeTap(12)">1
-                        Year</button>
-                </kendo-buttongroup>
-
-
+                    </kendo-combobox>
+            
+                    <kendo-buttongroup selection="single">
+                        <button kendoButton [toggleable]="true" icon="calendar" type="button" class="btn btn-sm btn-outline-secondary"
+                            (click)="onMonthRangeTap(3)">3
+                            Months</button>
+                        <button kendoButton [toggleable]="true" icon="calendar" type="button" class="btn btn-sm btn-outline-secondary"
+                            (click)="onMonthRangeTap(6)">6
+                            Months</button>
+                        <button kendoButton [toggleable]="true" icon="calendar" type="button" class="btn btn-sm btn-outline-secondary"
+                            (click)="onMonthRangeTap(12)">1
+                            Year</button>
+                    </kendo-buttongroup>
+                    </div>
+              </div>
             </div>
-
+          </div>
         </div>
     </div>
 
-    <div class="card">
-        <h3 class="card-header">Active Issues</h3>
-        <div class="card-block">
-            <app-active-issues [statusCounts]="statusCounts$ | async"></app-active-issues>
+    <div class="DiagramAndStatistics"
+            style="height: 525px; flex-direction: column; justify-content: flex-start; align-items: center; gap: 16px; display: flex">
 
+        @if(statusCounts$ | async) { 
+            <app-active-issues [statusCounts]="statusCounts$ | async" class="Statistics"
+            style="align-self: stretch; padding-left: 192px; padding-right: 192px; padding-top: 16px; padding-bottom: 16px; background: #FAFAFA; border-radius: 4px; justify-content: space-between; align-items: center; display: inline-flex"></app-active-issues>
+        }
 
-            <div class="row">
-                <div class="col-sm-12">
-                    <h3>All issues</h3>
-                    <kendo-chart>
-                        <kendo-chart-series-defaults type="column" [stack]="true" [gap]="0.06"></kendo-chart-series-defaults>
-
-
-                        <kendo-chart-category-axis>
-                            <kendo-chart-category-axis-item [categories]="categories" [baseUnit]="'months'"
-                                [majorGridLines]="{visible: false}" [labels]="{rotation: 'auto', margin: { top: 20 }}"></kendo-chart-category-axis-item>
-                        </kendo-chart-category-axis>
-
-                        <kendo-chart-series>
-                            <kendo-chart-series-item [data]="itemsOpenByMonth" [opacity]="0.7" [color]="'#CC3458'">
-                            </kendo-chart-series-item>
-
-                            <kendo-chart-series-item [data]="itemsClosedByMonth" [opacity]="0.7" [color]="'#35C473'">
-                            </kendo-chart-series-item>
-                        </kendo-chart-series>
-
-                    </kendo-chart>
+        <div class="Frame36"
+                style="align-self: stretch; height: 405px; flex-direction: column; justify-content: flex-start; align-items: flex-end; gap: 8px; display: flex">
+            <div class="Frame38"
+                    style="align-self: stretch; justify-content: space-between; align-items: flex-start; display: inline-flex">
+                <div class="Statistics"
+                        style="width: 218px; flex-direction: column; justify-content: flex-start; align-items: flex-start; display: inline-flex">
+                    <div class="Label" style="justify-content: center; align-items: flex-start; display: inline-flex">
+                        <div class="BaseInputLabel"
+                                style="justify-content: flex-start; align-items: center; gap: 6px; display: flex">
+                            <div class="Label"
+                                    style="color: #3D3D3D; font-size: 21px; font-family: Roboto; font-weight: 700; line-height: 27.93px; word-wrap: break-word">
+                                All Issues
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Label" style="justify-content: center; align-items: flex-start; display: inline-flex">
+                        <div class="BaseInputLabel"
+                                style="justify-content: flex-start; align-items: center; gap: 6px; display: flex">
+                            <div class="Label"
+                                    style="color: #3D3D3D; font-size: 16px; font-family: Roboto; font-weight: 400; line-height: 24px; word-wrap: break-word">
+                                Active Issues
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="Statistics"
+                        style="width: 218px; align-self: stretch; flex-direction: column; justify-content: space-between; align-items: flex-end; display: inline-flex">
+                    <div class="Label" style="justify-content: center; align-items: flex-start; display: inline-flex">
+                        <div class="BaseInputLabel"
+                                style="justify-content: flex-start; align-items: center; gap: 6px; display: flex">
+                            <div class="Label"
+                                    style="color: #3D3D3D; font-size: 16px; font-family: Roboto; font-weight: 400; line-height: 24px; word-wrap: break-word">
+                                Highest: 100% on Oct 11, 2018
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Label" style="justify-content: center; align-items: flex-start; display: inline-flex">
+                        <div class="BaseInputLabel"
+                                style="justify-content: flex-start; align-items: center; gap: 6px; display: flex">
+                            <div class="Label"
+                                    style="color: #3D3D3D; font-size: 16px; font-family: Roboto; font-weight: 400; line-height: 24px; word-wrap: break-word">
+                                Lowest: 20% on Oct 9, 2018
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="Frame36"
+                style="display:block; width:100%;">
+        
+                <kendo-chart>
+                    <kendo-chart-series-defaults type="column" [stack]="true" [gap]="0.06"></kendo-chart-series-defaults>
+
+
+                    <kendo-chart-category-axis>
+                        <kendo-chart-category-axis-item [categories]="categories" [baseUnit]="'months'"
+                            [majorGridLines]="{visible: false}" [labels]="{rotation: 'auto', margin: { top: 20 }}"></kendo-chart-category-axis-item>
+                    </kendo-chart-category-axis>
+
+                    <kendo-chart-series>
+                        <kendo-chart-series-item [data]="itemsOpenByMonth" [opacity]="0.7" [color]="'#CC3458'">
+                        </kendo-chart-series-item>
+
+                        <kendo-chart-series-item [data]="itemsClosedByMonth" [opacity]="0.7" [color]="'#35C473'">
+                        </kendo-chart-series-item>
+                    </kendo-chart-series>
+
+                </kendo-chart>
+        
+        </div>
+
     </div>
+
 
 </div>

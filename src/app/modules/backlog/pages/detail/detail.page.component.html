@@ -1,13 +1,24 @@
-<div *ngIf="item">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-        <h1 class="h2"><span class="k-icon k-i-edit"></span> {{ item.title }}</h1>
+@if(item) {
+<div>
+    
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+          <!-- Frame13 on the left -->
+          <div class="col-auto">
+            <div class="Frame13 d-flex flex-column align-items-start gap-2" style="width: 700px;">
+              <div class="Label text-center" style="color: #3D3D3D; font-size: 40px; font-family: Roboto; font-weight: 500;">
+                {{ item.title }}
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
 
 
     <kendo-tabstrip (tabSelect)="onTabSelect($event)">
-        <kendo-tabstrip-tab title="Details" [selected]="isTabSelected('details')">
+        <kendo-tabstrip-tab title="Form" [selected]="isTabSelected('form')">
             <ng-template kendoTabContent>
-                <app-item-details [item]="item" (itemSaved)="onItemSaved($event)" (usersRequested)="onUsersRequested($event)"></app-item-details>
+                <app-item-form [item]="item" (itemSaved)="onItemSaved($event)" (usersRequested)="onUsersRequested($event)"></app-item-form>
             </ng-template>
         </kendo-tabstrip-tab>
         <kendo-tabstrip-tab title="Tasks" [selected]="isTabSelected('tasks')">
@@ -30,3 +41,4 @@
     </kendo-tabstrip>
 
 </div>
+}

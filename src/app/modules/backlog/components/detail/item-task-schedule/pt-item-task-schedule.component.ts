@@ -1,18 +1,20 @@
 import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import { BehaviorSubject } from 'rxjs';
+
+import { SchedulerEvent, SaveEvent, RemoveEvent, CreateFormGroupArgs, KENDO_SCHEDULER } from '@progress/kendo-angular-scheduler';
+
 import { PtTask } from '../../../../../core/models/domain';
 import { PtNewTask, PtTaskUpdate } from '../../../../../shared/models/dto';
 import { EMPTY_STRING } from '../../../../../core/helpers/string-helpers';
-import { BehaviorSubject } from 'rxjs';
-import { SchedulerEvent, SaveEvent, RemoveEvent } from '@progress/kendo-angular-scheduler';
-
 
 @Component({
     selector: 'app-item-task-schedule',
     templateUrl: 'pt-item-task-schedule.component.html',
     styleUrls: ['pt-item-task-schedule.component.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [KENDO_SCHEDULER]
 })
 export class PtItemTaskScheduleComponent implements OnInit {
 
@@ -22,11 +24,10 @@ export class PtItemTaskScheduleComponent implements OnInit {
     @Output() updateTask = new EventEmitter<PtTaskUpdate>();
 
     public newTaskTitle = EMPTY_STRING;
-    private lastUpdatedTitle = EMPTY_STRING;
 
     public displayDate = new Date();
     public startTime = '07:00';
-    public events: SchedulerEvent[] = [];
+    public schedulerEvents: SchedulerEvent[] = [];
     public formGroup: FormGroup | undefined;
 
     constructor(private formBuilder: FormBuilder) {
@@ -35,7 +36,7 @@ export class PtItemTaskScheduleComponent implements OnInit {
 
     public ngOnInit() {
         this.tasks$.subscribe(tasks => {
-            const sevents = tasks.filter(t => t.dateStart && t.dateEnd).map(t => {
+            const events = tasks.filter(t => t.dateStart && t.dateEnd).map(t => {
                 const evt: SchedulerEvent = {
                     id: t.id,
                     title: t.title ? t.title : '',
@@ -46,16 +47,16 @@ export class PtItemTaskScheduleComponent implements OnInit {
                 return evt;
             });
 
-            if (sevents.length > 0) {
-                this.events = sevents;
-                const minDate = new Date(Math.min.apply(null, sevents.map((e) => new Date(e.start).valueOf())));
+            if (events.length > 0) {
+                this.schedulerEvents = events;
+                const minDate = new Date(Math.min.apply(null, events.map((e) => new Date(e.start).valueOf())));
                 this.displayDate = minDate;
             }
         });
     }
 
-    public createFormGroup(args: any): FormGroup {
-        const ev = args.event;
+    public createFormGroup(args: CreateFormGroupArgs): FormGroup {
+        const ev = args.dataItem;
 
         this.formGroup = this.formBuilder.group({
             'id': args.isNew ? this.getNextId() : ev.id,
@@ -73,8 +74,8 @@ export class PtItemTaskScheduleComponent implements OnInit {
     }
 
     public getNextId(): number {
-        const len = this.events.length;
-        return (len === 0) ? 1 : this.events[this.events.length - 1].id + 1;
+        const len = this.schedulerEvents.length;
+        return (len === 0) ? 1 : this.schedulerEvents[this.schedulerEvents.length - 1].id + 1;
     }
 
     public onSave(args: SaveEvent) {
